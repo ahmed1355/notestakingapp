@@ -65,7 +65,6 @@
     letter-spacing: 0.54px;
   }
 
-  /* crnotes.module.css */
 
   .popup {
     position: fixed;
@@ -107,7 +106,7 @@
     cursor: pointer;
   }
 
-  .group-container {
+  .group_container {
     display: flex;
     align-items: center;
     margin-top: 40px;
@@ -124,14 +123,11 @@
   letter-spacing: 0.413px;
   }
   .group-circle {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
+ 
     display: flex;
     align-items: center;
     justify-content: center;
     margin-right: 10px;
-    position: relative;
   }
 
   .group-circle span {
@@ -139,7 +135,6 @@
   font-size: 20.67px;
   font-family: Roboto;
     font-weight: 500;
-    /* font-size: 16px; */
     text-transform: uppercase;
     position: absolute;
 

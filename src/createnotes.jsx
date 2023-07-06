@@ -2,12 +2,6 @@ import React, { useState, useEffect } from "react";
 import styles from "./crnotes.module.css";
 import PopupBox from "./PopupBox";
 
-import voilet from "./assets/voilet.svg";
-import pink from "./assets/pink.svg";
-import florescent from "./assets/flor.png";
-import orange from "./assets/orange.svg";
-import blue from "./assets/blue.svg";
-import lblue from "./assets/light_blue.svg";
 
 function Createnotes() {
   const [showModal, setShowModal] = useState(false);
@@ -29,6 +23,7 @@ function Createnotes() {
       selectedImage,
     };
 
+   
     setCreatedGroups([...createdGroups, newGroup]);
     setShowModal(false);
     setGroupName("");
@@ -39,7 +34,6 @@ function Createnotes() {
   useEffect(() => {
     localStorage.setItem("createdGroups", JSON.stringify(createdGroups));
   }, [createdGroups]);
-
 
   // localStorage.clear()
   return (
@@ -62,12 +56,8 @@ function Createnotes() {
       )}
 
       {createdGroups.map((group, index) => (
-        <div className={styles["group-container"]} key={index}>
-          <div
-            className={`${styles["group-circle"]} ${
-              styles[group.selectedColor.toLowerCase()]
-            }`}
-          >
+        <div className={styles.group_container} key={index}>
+          <div className={`${styles["group-circle"]} `}>
             <span>{group.groupName.slice(0, 2).toUpperCase()}</span>
             {group.selectedImage && (
               <img src={group.selectedImage} alt="Selected" />
@@ -77,12 +67,7 @@ function Createnotes() {
         </div>
       ))}
 
-      <img src={voilet} alt="Voilet" className={styles.hidden} />
-      <img src={pink} alt="Pink" className={styles.hidden} />
-      <img src={florescent} alt="Florescent" className={styles.hidden} />
-      <img src={orange} alt="Orange" className={styles.hidden} />
-      <img src={blue} alt="Blue" className={styles.hidden} />
-      <img src={lblue} alt="Light Blue" className={styles.hidden} />
+    
     </div>
   );
 }

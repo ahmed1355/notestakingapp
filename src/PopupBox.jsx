@@ -8,6 +8,8 @@ import orange from "./assets/orange.svg";
 import blue from "./assets/blue.svg";
 import lblue from "./assets/light_blue.svg";
 
+
+// receives several props,
 const PopupBox = ({
   groupName,
   selectedColor,
@@ -29,7 +31,7 @@ const PopupBox = ({
       <div className={styles.modal}>
         <h2 className={styles.modalHeading}>Create New Notes Group</h2>
         <div className={styles.lab}>
-          <label htmlFor="group-name" className={styles.labelll}>Group Name:</label>
+          <label  className={styles.labelll}>Group Name:</label>
           <input
             id="group-name"
             type="text"
@@ -41,7 +43,7 @@ const PopupBox = ({
           <br />
 
           <div className={styles.col_wrapper}>
-            <label htmlFor="group-name" className={styles.lab_color}>
+            <label  className={styles.lab_color}>
               Choose colour:
             </label>
             <div className={styles.diff_color}>
@@ -87,14 +89,6 @@ const PopupBox = ({
   );
 };
 
-PopupBox.propTypes = {
-  groupName: PropTypes.string.isRequired,
-  selectedColor: PropTypes.string.isRequired,
-  onSubmit: PropTypes.func.isRequired,
-  setGroupName: PropTypes.func.isRequired,
-  setSelectedColor: PropTypes.func.isRequired,
-  setSelectedImage: PropTypes.func.isRequired,
-  selectedImage: PropTypes.string.isRequired,
-};
+
 
 export default PopupBox;
