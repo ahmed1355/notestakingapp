@@ -90,7 +90,6 @@ const PopupBox = ({
 PopupBox.propTypes = {
   groupName: PropTypes.string.isRequired,
   selectedColor: PropTypes.string.isRequired,
-  onClose: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
   setGroupName: PropTypes.func.isRequired,
   setSelectedColor: PropTypes.func.isRequired,
