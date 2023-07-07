@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./crnotes.module.css";
 import PopupBox from "./PopupBox";
-
+import Viewchat from "./viewchat";
 
 function Createnotes() {
   const [showModal, setShowModal] = useState(false);
@@ -9,6 +9,8 @@ function Createnotes() {
   const [selectedColor, setSelectedColor] = useState("");
   const [selectedImage, setSelectedImage] = useState("");
   const [createdGroups, setCreatedGroups] = useState([]);
+  const [selectedGroupIndex, setSelectedGroupIndex] = useState(null);
+  const [isChatVisible, setChatVisible] = useState(true);
 
   useEffect(() => {
     const storedGroups = localStorage.getItem("createdGroups");
@@ -16,6 +18,7 @@ function Createnotes() {
       setCreatedGroups(JSON.parse(storedGroups));
     }
   }, []);
+
   const handleCreate = (groupName, selectedColor, selectedImage) => {
     const newGroup = {
       groupName,
@@ -23,7 +26,6 @@ function Createnotes() {
       selectedImage,
     };
 
-   
     setCreatedGroups([...createdGroups, newGroup]);
     setShowModal(false);
     setGroupName("");
@@ -35,7 +37,11 @@ function Createnotes() {
     localStorage.setItem("createdGroups", JSON.stringify(createdGroups));
   }, [createdGroups]);
 
-  // localStorage.clear()
+  const handleGroupNameClick = (index) => {
+    setSelectedGroupIndex(index);
+    setChatVisible(false);
+  };
+
   return (
     <div className={styles.left}>
       <h1>Pocket Notes</h1>
@@ -60,14 +66,32 @@ function Createnotes() {
           <div className={`${styles["group-circle"]} `}>
             <span>{group.groupName.slice(0, 2).toUpperCase()}</span>
             {group.selectedImage && (
-              <img src={group.selectedImage} alt="Selected" />
+              <div className={styles["pink-container"]}>
+                <img
+                  src={group.selectedImage}
+                  alt="Selected"
+                  className={`${styles.selectedImage} ${
+                    selectedGroupIndex === index
+                      ? styles["pink-color-image"]
+                      : ""
+                  }`}
+                  onClick={() => handleGroupNameClick(index)}
+                />
+              </div>
             )}
           </div>
-          <span className={styles.grp_name}>{group.groupName}</span>
+          <span
+            className={`${styles.grp_name} ${
+              selectedGroupIndex === index ? styles["pink-color"] : ""
+            }`}
+            onClick={() => handleGroupNameClick(index)}
+          >
+            {group.groupName}
+          </span>
         </div>
       ))}
 
-    
+      {/* {!isChatVisible && <Viewchat />} */}
     </div>
   );
 }
