@@ -2,15 +2,16 @@ import React, { useState, useEffect } from "react";
 import styles from "./crnotes.module.css";
 import PopupBox from "./PopupBox";
 import Viewchat from "./viewchat";
+import Inputchat from "./inputchat";
 
-function Createnotes() {
+function Createnotes({ handleGroupClick }) {
   const [showModal, setShowModal] = useState(false);
   const [groupName, setGroupName] = useState("");
   const [selectedColor, setSelectedColor] = useState("");
   const [selectedImage, setSelectedImage] = useState("");
   const [createdGroups, setCreatedGroups] = useState([]);
   const [selectedGroupIndex, setSelectedGroupIndex] = useState(null);
-  const [isChatVisible, setChatVisible] = useState(true);
+  // const [isChatVisible, setChatVisible] = useState(false);
 
   useEffect(() => {
     const storedGroups = localStorage.getItem("createdGroups");
@@ -39,9 +40,10 @@ function Createnotes() {
 
   const handleGroupNameClick = (index) => {
     setSelectedGroupIndex(index);
-    setChatVisible(false);
+    // setChatVisible(false);
+    handleGroupClick();
   };
-
+// localStorage.clear()
   return (
     <div className={styles.left}>
       <h1>Pocket Notes</h1>
