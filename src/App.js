@@ -24,8 +24,8 @@ import React from "react";
 import Createnotes from "./createnotes";
 import Viewchat from "./viewchat";
 import styles from "./App.module.css";
-import Inputchat from "./inputchat";
 import { useState } from "react";
+import Inputchat from "./Inputchat";
 import { GroupProvider } from "./GroupContext";
 
 export default function App() {

@@ -56,7 +56,11 @@ function Inputchat() {
       setInputText("");
     }
   };
-
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      handleEnterClick();
+    }
+  };    
 // localStorage.clear()    
 
 
@@ -114,6 +118,7 @@ function Inputchat() {
             placeholder="Enter your text here..........."
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
+            onKeyDown={handleKeyDown}
           />
           <img
             src={enter}
