@@ -1,24 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import styles from "./crnotes.module.css";
 import PopupBox from "./PopupBox";
-import Viewchat from "./viewchat";
-import Inputchat from "./inputchat";
+import { useState } from "react";
+import { GroupContext } from "./GroupContext";
 
 function Createnotes({ handleGroupClick }) {
+  const { createdGroups, selectedGroupIndex } = useContext(GroupContext);
+  const { setCreatedGroups, setSelectedGroupIndex } = useContext(GroupContext);
   const [showModal, setShowModal] = useState(false);
   const [groupName, setGroupName] = useState("");
   const [selectedColor, setSelectedColor] = useState("");
   const [selectedImage, setSelectedImage] = useState("");
-  const [createdGroups, setCreatedGroups] = useState([]);
-  const [selectedGroupIndex, setSelectedGroupIndex] = useState(null);
-  // const [isChatVisible, setChatVisible] = useState(false);
 
   useEffect(() => {
     const storedGroups = localStorage.getItem("createdGroups");
     if (storedGroups) {
       setCreatedGroups(JSON.parse(storedGroups));
     }
-  }, []);
+  }, [setCreatedGroups]);
 
   const handleCreate = (groupName, selectedColor, selectedImage) => {
     const newGroup = {
@@ -40,16 +39,19 @@ function Createnotes({ handleGroupClick }) {
 
   const handleGroupNameClick = (index) => {
     setSelectedGroupIndex(index);
-    // setChatVisible(false);
     handleGroupClick();
   };
-// localStorage.clear()
+
+  const isMobile = window.innerWidth <= 768;
+
   return (
     <div className={styles.left}>
       <h1>Pocket Notes</h1>
-      <button onClick={() => setShowModal(true)}>
-        <p className={styles.crnote}>+ Create Notes group</p>
-      </button>
+      {!isMobile && (
+        <button onClick={() => setShowModal(true)}>
+          <p className={styles.crnote}>+ Create Notes group</p>
+        </button>
+      )}
 
       {showModal && (
         <PopupBox
@@ -82,18 +84,18 @@ function Createnotes({ handleGroupClick }) {
               </div>
             )}
           </div>
-          <span
-            className={`${styles.grp_name} ${
-              selectedGroupIndex === index ? styles["pink-color"] : ""
-            }`}
-            onClick={() => handleGroupNameClick(index)}
-          >
-            {group.groupName}
-          </span>
+          {!isMobile && (
+            <span
+              className={`${styles.grp_name} ${
+                selectedGroupIndex === index ? styles["pink-color"] : ""
+              }`}
+              onClick={() => handleGroupNameClick(index)}
+            >
+              {group.groupName}
+            </span>
+          )}
         </div>
       ))}
-
-      {/* {!isChatVisible && <Viewchat />} */}
     </div>
   );
 }
