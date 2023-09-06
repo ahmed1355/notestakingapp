@@ -23,8 +23,7 @@
 import React from "react";
 import Createnotes from "./createnotes";
 import Viewchat from "./viewchat";
-import Inputchat from "./inputchat";
-
+import Inputchat from "./Inputchat";
 import styles from "./App.module.css";
 import { useState } from "react";
 import { GroupProvider } from "./GroupContext";
